@@ -461,7 +461,7 @@ def _set_input_messages(span, messages):
             })
         elif role == "user":
             content = msg.get("content")
-            content = [{"text": content, "type": "text"}] if isinstance(content, str) else content
+            content = [{"content": content, "type": "text"}] if isinstance(content, str) else content
             # TODO: convert image_url parts to uri parts, process image parts and add the new uri parts
             attr_messages.append({
                 "role": role,
@@ -469,14 +469,14 @@ def _set_input_messages(span, messages):
             })
         elif role in ["system", "developer"]:
             content = msg.get("content")
-            content = [{"text": content, "type": "text"}] if isinstance(content, str) else content
+            content = [{"content": content, "type": "text"}] if isinstance(content, str) else content
             attr_messages.append({
                 "role": "system",
                 "parts": content,
             })
         elif role == "assistant":
             content = msg.get("content")
-            parts = [{"text": content, "type": "text"}] if isinstance(content, str) else content
+            parts = [{"content": content, "type": "text"}] if isinstance(content, str) else content
             tool_calls = _parse_tool_calls(msg.get("tool_calls")) or []
             for tool_call in tool_calls:
                 parts.append({

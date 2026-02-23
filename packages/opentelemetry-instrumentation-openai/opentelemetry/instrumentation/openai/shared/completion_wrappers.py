@@ -174,7 +174,7 @@ def _set_input_messages(span, prompt):
         span,
         "gen_ai.input.messages",
         # f"{SpanAttributes.GEN_AI_INPUT_MESSAGES}",
-        json.dumps([{"role": "user", "parts": [{"text": prompt, "type": "text"}]}]),
+        json.dumps([{"role": "user", "parts": [{"content": prompt, "type": "text"}]}]),
     )
 
 def _legacy_set_prompts(span, prompt):
@@ -204,7 +204,7 @@ def _set_output_messages(span, choices):
     for choice in choices:
         messages.append({
             "role": "assistant",
-            "parts": [{"text": choice.get("text"), "type": "text"}],
+            "parts": [{"content": choice.get("text"), "type": "text"}],
             "finish_reason": choice.get("finish_reason") or "stop",
         })
     _set_span_attribute(
